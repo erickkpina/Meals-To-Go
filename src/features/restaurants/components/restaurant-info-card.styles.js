@@ -9,6 +9,7 @@ export const Icon = styled.Image`
 
 export const RestaurantCard = styled(Card)`
   	background-color: ${(props) => props.theme.colors.bg.primary};
+	border-radius: 5px;
 `;
 
 export const RestaurantCardCover = styled(Card.Cover)`
