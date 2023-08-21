@@ -41,7 +41,7 @@ export const RestaurantsScreen = ({ navigation }) => {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate("RestaurantDetail" , {restaurant: item})} // Esse é a linha que leva para o detalhe do restaurante
+              onPress={() => navigation.navigate("RestaurantDetail" , {restaurant: item})}
             >
 				<Spacer position="bottom" size="large">
 					<RestaurantInfoCard restaurant={item} />
