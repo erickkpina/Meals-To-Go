@@ -69,11 +69,11 @@ export const RestaurantDetailScreen = ({ route }) => {
 
 export const styles = StyleSheet.create({
     container: {
-      marginTop: 0,
+        marginTop: 50,
       
     },
     accordionContent: {
-      backgroundColor: "#F2F2F2", 
+        backgroundColor: "#F2F2F2", 
     },
     
   });

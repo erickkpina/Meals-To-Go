@@ -1,27 +1,20 @@
 import React, { useContext, useState, useEffect } from 'react';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import styled from 'styled-components/native';
+import { View, Text } from 'react-native';
 
 import { Search } from '../components/search.component';
 import { LocationContext } from '../../../services/location/location.context';
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
+import { MapCallout } from "../components/map-callout.component";
 
 const Map = styled(MapView)`
     height: 100%;
     width: 100%;
 `;
 
-const CustomMarker = ({ restaurant }) => (
-    <Marker
-        title={restaurant.name}
-        coordinate={{
-            latitude: restaurant.geometry.location.lat,
-            longitude: restaurant.geometry.location.lng,
-        }}
-    />
-);
 
-export const MapScreen = () => {
+export const MapScreen = ({ navigation }) => {
     const { location } = useContext(LocationContext);
     const { restaurants = [] } = useContext(RestaurantsContext);
     const [latDelta, setLatDelta] = useState(0);
@@ -46,7 +39,18 @@ export const MapScreen = () => {
                 }}
             > 
                 {restaurants.map((restaurant) => (
-                    <CustomMarker key={restaurant.name} restaurant={restaurant} />
+                    <Marker
+                        key={restaurant.name}
+                        title={restaurant.name}
+                        coordinate={{
+                        latitude: restaurant.geometry.location.lat,
+                        longitude: restaurant.geometry.location.lng
+                        }}
+                    >
+                        <Callout onPress={() => navigation.navigate("RestaurantDetail", { restaurant: restaurant })}>
+                            <MapCallout restaurant={restaurant} />
+                        </Callout>
+                    </Marker>
                 ))}
             </Map>
         </>
