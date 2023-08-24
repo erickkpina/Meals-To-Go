@@ -1,4 +1,4 @@
-import Reactm, {useContext} from "react";
+import React, {useContext} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -9,6 +9,7 @@ import { SafeArea } from "../../components/utility/safe-area.component";
 import { RestaurantsNavigator } from "./restaurants.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
 import { AuthenticationContext } from "../../services/authentication/authentication.context";
+import { SettingsNavigator } from "./settings.navigator";
 
 import { RestaurantsContextProvider } from "../../services/restaurants/restaurants.context";
 import { LocationContextProvider } from "../../services/location/location.context";
@@ -22,15 +23,6 @@ const TAB_ICON = {
 	Settings: "md-settings",
 };
 
-const Settings = () => {
-	const { onLogout } = useContext(AuthenticationContext);
-	return(
-		<SafeArea>
-			<Text>Settings</Text>
-			<Button title="Logout" onPress={() => onLogout()} />
-		</SafeArea>
-	);
-};
 
 
 const createScreenOptions = ({ route }) => {
@@ -48,7 +40,9 @@ export const AppNavigator = () => (
     <LocationContextProvider>
       <RestaurantsContextProvider>
         <Tab.Navigator
-          screenOptions={createScreenOptions}
+          screenOptions={
+			createScreenOptions
+		}
           tabBarOptions={{
             activeTintColor: "purple",
             inactiveTintColor: "gray",
@@ -56,7 +50,7 @@ export const AppNavigator = () => (
         >
           <Tab.Screen name="Restaurants" component={RestaurantsNavigator} options={{ headerShown: false }} />
           <Tab.Screen name="Map" component={MapScreen} options={{ headerShown: false }} />
-          <Tab.Screen name="Settings" component={Settings} options={{ headerShown: false }} />
+          <Tab.Screen name="Settings" component={SettingsNavigator} options={{ headerShown: false }} />
         </Tab.Navigator>
       </RestaurantsContextProvider>
     </LocationContextProvider>

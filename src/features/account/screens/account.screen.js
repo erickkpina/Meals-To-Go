@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Text } from "react-native";
+import LottieView from "lottie-react-native";
 import { ImageBackground } from "react-native";
 import { Button } from "react-native-paper";
 
-import { AccountCover, AccountContainer, AuthButton, Title } from "../components/account.styles";
+import { AccountCover, AccountContainer, AuthButton, Title, AnnimationWrapper } from "../components/account.styles";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 const AccountBackground = styled(ImageBackground)`
@@ -15,12 +15,23 @@ const AccountBackground = styled(ImageBackground)`
 
 
 
+
+
 export const AccountScreen = ({ navigation }) => {
     return (
         
         <AccountBackground source={require("../../../../assets/home_bg.png")}>
             <Title>Meals To Go</Title>
             <AccountCover />
+            <AnnimationWrapper>
+                <LottieView 
+                    key="animation"
+                    autoPlay
+                    loop
+                    resizeMode="cover"
+                    source={require("../../../../assets/watermelon.json")}
+                />
+            </AnnimationWrapper>
             <AccountContainer>
                 <Spacer size="medium">
                     <AuthButton 

@@ -12,12 +12,9 @@ import { FavouritesBar  } from "../../../components/favourites/favourites-bar.co
 
 import { Search } from "../components/search.component";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
+import { RestaurantList } from "../components/restaurant-list.styles";
 
-const RestaurantList = styled(FlatList).attrs({
-  contentContainerStyle: {
-    padding: 16,
-  },
-})``;
+import { FadeInView } from "../../../components/animations/fade.animation";
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
@@ -43,21 +40,23 @@ export const RestaurantsScreen = ({ navigation }) => {
 				isFavouritesToggled={isToggled} onFavouritesToggle={() => setIsToggled(!isToggled)}
 			/>
 			{isToggled && <FavouritesBar favourites={ favourites } onNavigate={navigation.navigate} />}
-			<RestaurantList
-				data={restaurants}
-				renderItem={({ item }) => {
-					return (
-						<TouchableOpacity
-						onPress={() => navigation.navigate("RestaurantDetail" , {restaurant: item})}
-						>
-							<Spacer position="bottom" size="large">
-								<RestaurantInfoCard restaurant={item} />
-							</Spacer>
-						</TouchableOpacity>
-					);
-				}}
-				keyExtractor={(item) => item.name}
-			/>
+				<RestaurantList
+					data={restaurants}
+					renderItem={({ item }) => {
+						return (
+							<TouchableOpacity
+							onPress={() => navigation.navigate("RestaurantDetail" , {restaurant: item})}
+							>
+								<Spacer position="bottom" size="large">
+									<FadeInView>
+										<RestaurantInfoCard restaurant={item} />
+									</FadeInView>
+								</Spacer>
+							</TouchableOpacity>
+						);
+					}}
+					keyExtractor={(item) => item.name}
+				/>
 		</SafeArea>
 	);
 };
